@@ -12,6 +12,14 @@
         <header>
             <h1>>Users</h1>
         </header>
+        <div>
+        <h3> Hola [[${#request.userPrincipal.principal.userName}]]</h3>
+         <form th:action="@{/logout}" method:"post">
+         <input type=submit value="Salir" />
+         </form>
+        
+        </div>
+        
 
         <div>
         <h3><a th:href="@{/list_users}">users </a></h3>

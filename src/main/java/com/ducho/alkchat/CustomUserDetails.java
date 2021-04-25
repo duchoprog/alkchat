@@ -55,5 +55,7 @@ public class CustomUserDetails implements UserDetails {
 		// TODO Auto-generated method stub
 		return true;
 	}
+	
+	public String getUserName() { return user.getName();}
 
 }
