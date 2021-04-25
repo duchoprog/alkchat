@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        
+        <title>Alkchat-Users</title>
+    </head>
+    <body>
+
+        <header>
+            <h1>>Users</h1>
+        </header>
+
+        <div>
+        <h3><a th:href="@{/list_users}">users </a></h3>
+        <h3><a th:href="@{/register}">register </a></h3>
+        <h3><a th:href="@{/login}">login </a></h3>
+                </div>
+                <div>
+                <table>
+                	<thead>
+                <tr>
+                <th>id</th>
+                <th>mail</th>
+                <th>name</th>
+                </tr>
+                <tbody>
+                <tr th:each="user:${listUsers}" >
+                <td th:text="${user.id}">ID</td>
+                <td th:text="${user.email}">Email</td>
+                <td th:text="${user.name}">Name</td>
+                </tr>
+                </tbody>
+                </thead>
+                </table>
+                
+                </div>
+    </body>
+</html>

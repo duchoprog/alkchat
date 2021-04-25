@@ -1,6 +1,9 @@
 package com.ducho.alkchat.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,18 +25,25 @@ public class AppController {
 		model.addAttribute("user", new User());
 		return "register";
 	}
-	
-	/*
-	 * @PostMapping("/process_reg") public String processReg(User user) {
-	 * userRepo.save(user); return "culo";}
-	 */
-@PostMapping("/process_reg")
-public String processRegister(User user) {
-	
-	userRepo.save(user);
-	
-	return "reg_success";
-}
+
+	@PostMapping("/process_reg")
+	public String processRegister(User user) {
+		
+		BCryptPasswordEncoder encoder= new BCryptPasswordEncoder();
+		String encodedPass=encoder.encode(user.getPassword());
+		user.setPassword(encodedPass);
+
+		userRepo.save(user);
+
+		return "reg_success";
+	}
+	@GetMapping("/list_users")
+	public String viewUsers(Model model){
+		List <User> listUsers=userRepo.findAll();
+		model.addAttribute("listUsers", listUsers);
+		
+		return "list_users";
+	}
 
 
 
